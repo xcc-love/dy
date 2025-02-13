@@ -22,7 +22,7 @@ import { showToast } from 'vant';
 
 
 // 定义数据
-const navData = reactive(['音乐类', '风景类', '看剧类', '推荐'])
+const navData = reactive(['家长分享', '手语课程', '手语学习', '手语音乐'])
 
 // 子组件接收父组件传来的值
 const props = defineProps({
@@ -38,14 +38,14 @@ videoStore.handleRecom() //触发actions
 // 监听视频分类的值做出相应操作
 watch(() => (videoStore.playsData.navIndex), (newValue) => {
     videoStore.$patch(() => {
-        // 推荐
-        if (newValue === 3) {
+        // 推荐 手语音乐
+        if (newValue === 3) { 
             videoStore.playsData = videoStore.recomData
-        } else if (newValue === 2) { //看剧类
+        } else if (newValue === 0) { //看剧类 家长分享
             videoStore.playsData = videoStore.dramaData
-        } else if (newValue === 1) { //风景类
+        } else if (newValue === 1) { //风景类 手语课程
             videoStore.playsData = videoStore.landscapeData
-        } else if (newValue === 0) { //音乐类
+        } else if (newValue === 2) { //音乐类 手语学习
             videoStore.playsData = videoStore.musicData
             emits('chatFlag', true)
         } else {
@@ -62,17 +62,17 @@ function handleTabs(i) {
     emits('changeTabs', true)  //将当前点击的标签传给父组件
     videoStore.$patch(() => {
         if (i === 3) {
-            console.log('推荐');
+            console.log('手语音乐');
             videoStore.playsData = videoStore.recomData
-        } else if (i === 2) {
-            console.log('看剧类');
+        } else if (i === 0) {
+            console.log('家长分享');
             videoStore.playsData = videoStore.dramaData
         } else if (i === 1) {
-            console.log('风景类');
+            console.log('手语课程');
             videoStore.playsData = videoStore.landscapeData
         }
         else {
-            console.log('音乐类');
+            console.log('手语学习');
             videoStore.playsData = videoStore.musicData
             emits('chatFlag', true)
         }
@@ -100,14 +100,14 @@ function handleTabs(i) {
     height: 50px;
 
     div {
-        width: 68%;
+        width: 75%;
         display: flex;
         justify-content: space-between;
-
         i {
             font-family: cursive;
             color: #fff;
-            font-size: 16px;
+            font-size: 14px;
+            text-wrap: nowrap;
         }
     }
 
